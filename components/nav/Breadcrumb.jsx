@@ -4,13 +4,13 @@ import Link from "next/link";
       <div style={{display : 'flex'}} className='breadcrumb'>
         <Link href={"/"}  legacyBehavior>
             <a>
-            <h1 className="logo brand" >@karlmlr/
+            <h1 className="logo brand" >@karlmlr
             </h1>
             </a>
         </Link>
         <Link href={href}  legacyBehavior>
             <a>
-            <h1 className="logo brand" >{request}/
+            <h1 className="logo brand" >{request}
             </h1>
             </a>
         </Link>

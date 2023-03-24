@@ -1,59 +1,40 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-const inter = Inter({ subsets: ['latin'] })
+
 import Light from '../public/light.svg'
-import Description from '../components/Description'
 
-
-// For translate
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-
-
-import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import EnDescription from "./locales/en/description.json";
+import FrDescription from "./locales/fr/description.json";
 
 
 
-i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    // the translations
-    // (tip move them in a JSON file and import them,
-    // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
-    resources: {
-      en: {
-        translation: {
-          "Welcome to React": "Welcome to React and react-i18next"
-        }
-      },
-      fr: {
-        translation: {
-          "Welcome to React": "bien"
-        }
-      }
-    },
-    lng: "en", // if you're using a language detector, do not define the lng option
-    fallbackLng: "en",
-
-    interpolation: {
-      escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
-    }
-  });
-
-const Home = () => {
-
-  const router = useRouter();
-  const { locale, locales, push } = router;
-  console.log(locale);
-  console.log(router);
 
 
-  const { t } = useTranslation();
+// const trad = {
+//   en: {
+//     translation: {
+//       "Description": "Description en"
+//     }
+//   },
+//   fr: {
+//     translation: {
+//       "Description": "Description fr"
+//     }
+//   }
+// }
+
+const Home = (props: any) => {
+
+    const locale = props.lng;
   
-  const handleClick = l => () => {};
+    let description = '';
+    if(locale === 'fr') {
+      description = FrDescription.Description;
+    } else {
+       description = EnDescription.Description;
+    }
+
+ 
   return (
     <>
       <Head>
@@ -68,83 +49,21 @@ const Home = () => {
       </Head>
       
       <main className={styles.container}>
-         
           <div className={styles.orbe1}></div>
           <div className={styles.orbe2}></div>
           <div className={styles.orbe3}></div>
-<h1>{t('Welcome to React')}</h1>
-          
-          <div className='center-element'>
-            <Light className={`ampoule`}/>
-            {/* <Image className={styles.thirteen}
-              src="/thirteen.svg"
-              alt="light"
-              width={40}
-              height={30}
-              priority
-            /> */}
-          </div>
+          <div>
+            <div className='center-element'>
+              <Light className={`ampoule`}/>
+            </div>
+          </div> 
+
           <div className={`description_grid`}>
-            <Description />
+            <p className='description'>
+              {description}
+            </p>
+            <p>photo</p>
           </div>
-        {/* <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div> */}
       </main>
     </>
   )

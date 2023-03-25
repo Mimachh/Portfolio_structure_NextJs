@@ -5,20 +5,18 @@ import { createContext, useState } from "react";
 import Mode from '../components/buttons/Mode';
 import useSound from 'use-sound';
 export const ThemeContext = createContext(null);
-
+import Light from '../public/light.svg'
+import Lang from "../components/buttons/Lang"
 
 export default function App({ Component, pageProps }: AppProps) {
 
   const [lng, setLng] = useState("fr");
   const [theme, setTheme] = useState("dark");
-  const [playOn] = useSound(
-    '../sounds/plac.wav',
-    { volume: 0.55 }
-  );
+  const [playPlac] = useSound('../sounds/plac.wav', { volume: 0.55 });
 
   function toggleTheme() {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
-    playOn();
+    playPlac();
   };
 
   function toggleLang() {
@@ -26,19 +24,25 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return  (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <main className='inter.className' id={theme}>
-        <Navbar lng={lng}/>
-        <div>
-          <button onClick={() => toggleLang()}>
-            {lng === 'fr' ? 'Langue en' : 'Langue fr'}
-          </button>
-        </div>
-        <div>
-          <Mode theme={theme} toggleTheme={toggleTheme}/>
-        </div>
-        <Component lng={lng} {...pageProps} />
-      </main>
-    </ThemeContext.Provider>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <main id={theme} className="body">
+          <div className='maxWidth'>
+            <Navbar lng={lng}/>
+              <div className="orbe1"></div>
+              <div className="orbe2"></div>
+              <div className="orbe3"></div>
+            <div>
+            <Lang theme={theme} lng={lng} toggleLang={toggleLang}/>
+            </div>
+            <div>
+              <Mode theme={theme} lng={lng} toggleTheme={toggleTheme}/>
+            </div>
+            <div className='center-element'>
+                  <Light className="ampoule"/>
+                </div>
+            <Component lng={lng} {...pageProps} />
+          </div>
+        </main>
+      </ThemeContext.Provider>
   );
 }

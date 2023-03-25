@@ -1,29 +1,44 @@
 import styles from '../buttons/Mode.module.css'
 import {useState, useEffect} from "react";
 
-import LightOpenFr from "../../pages/locales/fr/light_open";
-import LightOpenEn from "../../pages/locales/en/light_open";
-import LightCloseFr from "../../pages/locales/fr/light_close";
-import LightCloseEn from "../../pages/locales/en/light_close";
-
-function Mode ({toggleTheme, theme}){
+function Mode ({toggleTheme, theme, lng}){
   const [text, setText] = useState("");
-  const light_open_fr = LightOpenFr.products; 
-  const light_open_en = LightOpenEn.products; 
-  const light_close_fr = LightCloseFr.products; 
-  const light_close_en = LightCloseEn.products; 
 
-  useEffect(() => {
-     function randomText() {
-      const random = Math.floor(Math.random() * light_open_fr.length);
-      theme === "light" ? setText(light_open_fr[random]) : setText(light_close_fr[random]);
-    }
-    randomText();
-   
+    const light_open = {
+      en: [
+        "Turn the light off before leaving please",
+        "Turn off if you want to save baby seal"
+      ],
+      fr: [
+        "Eteins avant de partir quand même",
+        "Si tu laisses allumé tu vas tuer des bébés phoques, enculé"
+      ]
+    };
+    const light_close = {
+      en: [
+        "You can turn the light on",
+        "Come on, do it, you want it"
+      ],
+      fr: [
+        "Vas y allume la lumière",
+        "Tkt si t'es écolo, c'est de la basse consommation"
+      ]
+    };
+
+    useEffect(() => {
+      function randomText(lng) {
+        const random = Math.floor(Math.random() * light_open.en.length);
+        theme === "light" ? setText(lng === 'fr' ? light_open.fr[random] : light_open.en[random]) 
+        : setText(lng === 'fr' ? light_close.fr [random] : light_close.en[random]);
+      }
+      randomText(lng);
+    
+      
+      // setInterval(randomText, 1000, theme);
+    },[theme, lng]);
+
+
   
-  // setInterval(randomText, 1000, theme);
-},[theme])
-
 
   return (
     <div >

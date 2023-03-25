@@ -1,17 +1,20 @@
 /* Global */
 @import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+@import url('https://fonts.cdnfonts.com/css/merienda');
+@import url('https://fonts.cdnfonts.com/css/just-another-hand');
+@import url('https://fonts.cdnfonts.com/css/cookies-2');
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: 'MADE TOMMY', sans-serif;
-  color: white;
+  /* font-family: 'Merienda', sans-serif; */
+  /* font-family: 'Just Another Hand', sans-serif; */
+  /* font-family: 'Cookies bold', sans-serif; */
+                                                
 }
 
-#light * {
-  color:#171515;
-}
 
 html,
 body {
@@ -22,7 +25,19 @@ body {
   background: #171515;
 }
 
+.maxWidth {
+  max-width: 1420px;
+  margin: auto;
+}
 
+.body {
+  max-width: 100vw;
+}
+.container {
+  position: relative;
+  min-height: 100vh;
+  /* background: #171515; */
+}
 
 a{
   text-decoration: none;
@@ -35,7 +50,45 @@ a{
   }
 }
 
+.orbe1{
+  position: absolute;
+  top: 40vh;
+  right: -20vh;
+  box-sizing: border-box;
+  position: absolute;
+  width: 50vh;
+  height: 50vh;
+  background: #06F8CC;
+  filter: blur(30vh);
+  transform: rotate(0.82deg);
+  
+}
+.orbe2 {
+  position: absolute;
+  width: 35vh;
+  height: 37vh;
+  left: 50%;
+  top: 6%;
+  background: #1C84E5;
+  filter: blur(499.5px);
+}
+.orbe3 {
+  position: absolute;
+  width: 298px;
+  height: 299px;
+  left: 6vh;
+  top: 14vh;
+  background: #1C84E5;
+  filter: blur(700.5px);
+}
+
 /* Mode light */
+#light p, 
+#light small, 
+#light a {
+  color:#171515;
+}
+
 #light {
   background: #fff;
   animation: light 2s ease-in;
@@ -46,9 +99,6 @@ a{
   animation: dark 1s ease-in;
 }
 
-#light a {
-  color: #171515;
-}
 
 #dark a {
   color: inherit;
@@ -345,16 +395,25 @@ nav{
 }
 
 /* Description */
+.description_grid > div > h1 {
+  color:#1C84E5;
+}
+#light .description_grid > div > h1 {
+  color:#104678;
+}
+
 .description_grid {
   margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(66%, auto));
   width: var(--max-width);
   max-width: 100%;
+  margin-left: 32px;
 }
 .description {
-  background-color: red;
-  margin-left: 32px;
+  /* background-color: red; */
+  
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: 720px) {
@@ -371,3 +430,56 @@ nav{
 }
 
 
+
+/* PROJETS */
+
+.wrapperProject {
+  display: grid;
+  grid-template-columns: repeat(1fr);
+  grid-gap: 120px;
+  /* grid-auto-rows: minmax(100px, auto); */
+  background-color: red;
+  overflow-x: scroll;
+  grid-row: 1/1;
+  padding: 2rem;
+
+}
+
+.one {
+  /* grid-column: 1 / 3; */
+  grid-row: 1/1;
+  min-height: 50vh;
+  max-height: 50vh;
+  min-width: 35vw;
+  max-width: 35vw;
+  background-color: blue;
+  border-radius: 30px;
+  transition: transform .8s;
+  scroll-behavior: smooth;
+}
+
+.one:hover {
+transform: scale(1.1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #1C84E5;
+}
